@@ -1,12 +1,12 @@
 "use strict";  // Trear all js code as a newer version  of js
 
-alert('Hello');   // We are using nodejs not browser
+// alert('Hello');   // We are using nodejs not browser
 
 console.log(3 + 3);
 
 
 let name = 'Udit';
-age = 25;
+let age = 25;
 let isLoggedIn = false;
 let state;
 
@@ -23,3 +23,8 @@ let state;
 // Object 
 
 console.log(typeof "sam" );
+
+console.log(typeof undefined);  // undefined
+
+console.log(typeof null);  // Object
+
