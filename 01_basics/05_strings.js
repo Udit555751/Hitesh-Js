@@ -52,4 +52,4 @@ console.log(urlOne.includes('sam'));
 console.log(gameName.split("-"));
 
 const splt = gameName.split('');
-console.log(splt[3]);
+console.log(splt[3]);  
