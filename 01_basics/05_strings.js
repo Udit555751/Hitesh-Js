@@ -5,6 +5,7 @@ const age = 25;
 
 // console.log(`Hello my name is ${name} and age is ${age}`);
 
+
 // ============== Other method to declare string ==============
 
 const gameName = new String('Himesh-tech');
