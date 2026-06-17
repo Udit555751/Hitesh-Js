@@ -24,7 +24,7 @@ const newString = gameName.substring(0,3);
 console.log(newString);
 
 
-// Slice =>  it can take +ve and -ve both value, -ve will start from last digit of string and last index number 
+// Slice =>  it can take +ve and -ve both value, -ve will start from last character of string and last index number 
 // will not include.
 const anotherString = gameName.slice(-11,4);   
 console.log(anotherString);
