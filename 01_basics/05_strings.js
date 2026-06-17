@@ -19,7 +19,7 @@ console.log(gameName.charAt(2));
 console.log(gameName.indexOf('s'));
 
 
-// Substring => // last value will not includes o/p is Pub and it takes only +ve value.
+// Substring => // last value will not includes o/p is Him and it takes only +ve value.
 const newString = gameName.substring(0,3);   
 console.log(newString);
 
