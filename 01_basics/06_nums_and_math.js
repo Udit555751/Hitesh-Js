@@ -5,7 +5,7 @@ const score = 400;
 const balance = new Number(100);  // It will give us [Number: 100] , this means specifically this is number.
 // console.log(balance);
 
-// toString() => convert into String
+// toString() => It will convert Number into String
 // console.log(balance.toString().length);  // it will convert number into string
 const numStr = balance.toString();
 // console.log(typeof numStr)
