@@ -44,7 +44,7 @@ const urlOne = 'https://samfile%20tech';
 console.log(urlOne.replace('%20', '-'));
 
 
-// includes() => 
+// includes() => it will check that word/digit/char is present or not
 console.log(urlOne.includes('sam'));
 
 
