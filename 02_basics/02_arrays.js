@@ -39,7 +39,7 @@ let score1 = 100;
 let score2 = 200;
 let score3 = 300;
 
-// rray.from() sirf ek iterable object (jaise string, array, Set, NodeList) ya array-like object leta hai. 
+// array.from() sirf ek iterable object (jaise string, array, Set, NodeList) ya array-like object leta hai. 
 // Numbers (100, 200, 300) iterable nahi hote.
 
 // console.log(Array.from(score1, score2, score3));  ++++++ // wrong syntax ++++++
