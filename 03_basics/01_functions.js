@@ -128,3 +128,6 @@ function returnSecondValue(getArray){
 
 const returnVal = returnSecondValue(myNewArray);
 console.log(returnVal);
+
+// same as object  we can pass array during function call 
+console.log(returnSecondValue([1, 2, 3, 4, 5, 6]));
