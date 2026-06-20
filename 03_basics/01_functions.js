@@ -71,4 +71,60 @@ function loginUserMessageOne(username = "Sam"){
 }
 
 const loggedUserOne = loginUserMessageOne();
-console.log(loggedUserOne);
+// console.log(loggedUserOne);
+
+
+
+// If we are working at ecommerce web and make add cart pannel so I want add all value b/c we don't know how many items will 
+// add in cart through customer. So here we will use rest operator in parameter b/c we don't how many items will come through
+// customer. 
+
+// then we will use rest operator.
+
+function calculatePrice(...num1){
+    return num1
+}
+
+const calc = calculatePrice(200, 400, 350);
+// console.log(calc);
+
+
+// Function with Object or Object inside function (How we can pass object in function) -->
+
+const user = {
+    name: "sam",
+    price: 199
+}
+
+function handleObject(anyobject){
+    // console.log(`Username is ${anyobject.name} and price is ${anyobject.price}`);
+    return `Username is ${anyobject.name} and price is ${anyobject.price}`
+}
+const user1 = handleObject(user);
+console.log(user1);
+
+
+// Or we can pass object during function call 
+
+function handleObjectOne(anyobject){
+    console.log(`Username is ${anyobject.username} and price is ${anyobject.price}`);
+    // return `Username is ${anyobject.name} and price is ${anyobject.price}`
+}
+
+handleObjectOne({
+    username: "Pihu",
+    price: 399
+});
+
+
+
+// Function with Array or Array inside Function (How we can pass array inside function) --->
+
+const myNewArray = [1, 2, 3, 4, 5, 6];
+
+function returnSecondValue(getArray){
+    return getArray[2];
+}
+
+const returnVal = returnSecondValue(myNewArray);
+console.log(returnVal);
