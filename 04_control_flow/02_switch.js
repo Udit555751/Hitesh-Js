@@ -45,3 +45,28 @@ switch(month){
         console.log("Default Case Match");
         break;    
 }
+
+
+const monthOne = "march";
+
+switch(monthOne){
+    case "jan": 
+        console.log('jan');
+        break;
+    
+    case "feb": 
+        console.log("feb");
+        break;
+    
+    case "march":
+        console.log("march");
+        break;
+    
+    case "april":
+        console.log("april");
+        break;
+
+    default:
+        console.log("Default Case Match");
+        break;    
+}
