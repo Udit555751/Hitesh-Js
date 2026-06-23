@@ -1,5 +1,6 @@
 // While and do while ===>
 
+    
 let i = 0;
 while (i <= 10) {
     // console.log(`the value is ${i}`);
@@ -14,6 +15,20 @@ while(j < myArr.length){
     const elem = myArr[j];
     console.log(elem);
     j = j + 1;
+}
+
+
+// Nested While loop 
+
+let i = 5;
+let j = 1;
+
+while (i <= 5) {
+    while (j <= 10) {
+        console.log(`${i} x ${j} = ${i * j}`);
+        j++;
+    }
+    i++;
 }
 
 
