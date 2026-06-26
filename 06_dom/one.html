@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM Learning</title>
+</head>
+<body style="background-color: #212121; color: #fff;">
+
+    <div>
+        <h1 id="title" class="heading">DOM Learning on Chai and Code <span style="display:none">test text</span></h1>
+        <p>Lorem ipsum dolor sit amet.</p>
+
+        <h2>Lorem, ipsum dolor.</h2>
+        <h2>Lorem ipsum dolor sit.</h2>
+        <h2>Lorem ipsum dolor sit amet.</h2>
+
+        <input type="password">
+
+        <ul>
+            <li class="list-item">two</li>
+            <li class="list-item">one</li>
+            <li class="list-item">three</li>
+            <li class="list-item">four</li>
+        </ul>
+
+    </div>
+
+    <script>
+
+        // let val = document.getElementById('title').id;
+
+        // let val1 = document.getElementById('title').className;
+
+        // let val2 = document.getElementById('title').getAttribute('id');
+
+        // let val2 = document.getElementById('title').setAttribute('class', 'test heading');  // ye overwrite kr dega varna mujhe
+        //  old class bhi add kr ke rakhni padegi  
+
+        let val2 = document.getElementById('title');
+
+        val2.style.backgroundColor = 'red';
+        val2.style.padding = '10px';
+        val2.style.borderRadius = '10px';
+
+        // console.log(val2);
+
+
+        let val = val2.textContent; // isse hume saara text dikhega jo css/display property se hata hoga vo bhi.
+
+        let innerVal = val2.innerText;  // isse hume wahi text dikhenge jo visible hai, css ya display property 
+        // se hata hua text nhi dikhega.
+
+        let innHtml = val2.innerHTML;  // poore html ki value dega/ html tag ko bhi support krta hai.
+
+        // console.log(val);
+        // console.log(innerVal);
+        // console.log(innHtml);
+
+        let cls = document.getElementsByClassName('heading');
+        // console.log(cls);
+
+
+        // +++++++++++++ Query Selector +++++++++++++
+
+
+        // let qrSel = document.querySelector('h2');
+        // let qrSel = document.querySelector('#title');
+        // let qrSel = document.querySelector('.heading');
+        let qrSel = document.querySelector('input[type="password"]');
+        console.log(qrSel);
+
+
+        let myUl = document.querySelector('ul');
+        let turnRed = myUl.querySelector('li');
+        turnRed.style.backgroundColor = 'red';
+        turnRed.style.padding = '10px';
+
+        let liText = turnRed.innerText = 'five';
+        // console.log(liText);
+
+
+        // +++++++++++++ Query Selector ALL +++++++++++++
+
+        // ====> It give us nodelist which is not array but like a little bit of array, so we can handle this after converstion
+        // of it into array or we can apply foreach on it, if we want apply other loop then we have to convert in array, 
+        // kyuki ki ye page ke saare uss class ya id ya tag ke element ko select krta hai isiliye nodelist ban jaata hai. 
+
+
+        let qrAll = document.querySelectorAll('li');
+        // console.log(qrAll);
+
+        // qrAll[0].style.color = 'blue';  // if we want change any specific otherwise we will use foreach loop
+
+        // ======== OR =======
+
+        qrAll.forEach( (item) => {
+            // item.style.color = 'yellow';
+        } );
+
+
+
+        // +++++++++++++ Element select by className ++++++++++++++
+        // =====> it give us Html collection so any loop will not apply on it, first of all we have to convert it into array,
+        // and then we can loop on it.
+
+        let clsName = document.getElementsByClassName('list-item');
+        let convArr = Array.from(clsName);
+        console.log(convArr);
+
+        convArr.forEach( (list) => {
+            list.style.fontSize = "25px";
+        } );
+
+
+    </script>
+    
+</body>
+</html>
