@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM</title>
+</head>
+<body style="background-color: #212121; color: #fff;">
+    
+
+    <ul class="language">
+        <li>Javascript</li>
+    </ul>
+
+</body>
+
+<script>
+
+        function addLanguage(langName){
+           let li = document.createElement('li');
+           li.innerHTML = `${langName}`;
+           document.querySelector('.language').appendChild(li);
+           
+        }
+
+        addLanguage('NodeJs');
+        addLanguage("ExpressJs");
+
+
+        // More optimize code ===>
+
+        function addOptiLanguage(langName){
+            const list = document.createElement('li');
+            const addText = document.createTextNode(langName);
+            list.appendChild(addText);
+            document.querySelector('.language').appendChild(list);
+        }
+        
+        addOptiLanguage("React");
+        addOptiLanguage('Mongodb');
+
+
+        // Edit Value ====>
+
+
+        let secLang = document.querySelector('li:nth-child(2)');
+        // secLang.innerHTML = 'Mojo';
+        let newLi = document.createElement('li');
+        newLi.textContent = 'Mojo';
+        secLang.replaceWith(newLi);
+
+
+
+        const firstLang = document.querySelector('li:first-child');
+        firstLang.outerHTML = '<li>Typescript</li>'
+
+
+        // Remove ====>
+
+        const lastLang = document.querySelector('li:last-child');
+        lastLang.remove();
+
+
+</script>
+
+</html>
