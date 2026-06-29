@@ -1,0 +1,15 @@
+body{
+    background-color: #212121;
+    color: #fff;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#result{
+    height: 20px;
+    padding-top: 20px ;
+}
