@@ -1,0 +1,30 @@
+body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #wrapper {
+        text-align: center;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    #guess{
+        display: block;
+        font-size: 35px;
+        margin-bottom: 10px;
+    }
+
+    .guessSubmit {
+        display: block;
+        margin: 20px auto 0;
+    }
+
+    #newGame{
+        cursor: pointer;
+    }
+    
