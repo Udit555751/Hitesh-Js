@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Background Changer Mini Project</title>
+</head>
+<body>
+    
+    <h1>Random background color should change continously after <br> click to start and should end after click to stop</h1>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+
+</body>
+
+<script>
+
+    let randomColor = function () {
+        let hex = '0123456789ABCDEF';
+        let color = '#';
+
+        for (let i = 0; i < 6; i++) {
+            color += hex[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }      
+
+    let interVal;
+
+    let startChangingColor = function(){
+
+        let startBtn = document.querySelector('#start');
+
+        startBtn.addEventListener('click', function(){
+            if(!interVal){
+                    interVal = setInterval(function(){
+                    document.body.style.backgroundColor = randomColor();
+                }, 1000);
+            }
+        })
+    }
+
+
+    let stopChangingColor = function(){
+
+        let stopBtn = document.querySelector('#stop');
+
+        stopBtn.addEventListener('click', function(){
+            clearInterval(interVal);
+            interVal = null;
+        })
+    }
+
+    startChangingColor();
+    stopChangingColor();
+
+
+</script>
+
+</html>
