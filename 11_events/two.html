@@ -61,7 +61,9 @@
 
         let startBtn = document.getElementById('start');
         startBtn.addEventListener('click', function(){
-            let interVal = setInterval(`Udit is Best JS Developer`);
+            let interVal = setInterval(function(){
+                console.log(`Udit is Best Js Developer`);
+            }, 2000);
         });
 
         let stopBtn = document.getElementById('stop');
