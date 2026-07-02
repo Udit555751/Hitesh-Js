@@ -60,20 +60,25 @@
         let interVal;
 
         let startBtn = document.getElementById('start');
+
         startBtn.addEventListener('click', function(){
-            let interVal = setInterval(function(){
+            if(!interVal){
+                let interVal = setInterval(function(){
                 console.log(`Udit is Best Js Developer`);
-            }, 2000);
+                }, 2000); 
+            }
         });
 
         let stopBtn = document.getElementById('stop');
+
         stopBtn.addEventListener('click', function(){
             clearInterval(interVal);
+            interVal = null;
         })
 
     }
 
-
+    // button baar-baar click karoge to multiple intervals chalne lagenge. Usse bachne ke liye: (!interVal) check kiya hai.
 
 </script>
 
