@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SetInterval</title>
+</head>
+<body>
+    
+    <h1>Udit is Best Js Developer</h1>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+
+</body>
+
+<script>
+
+    setInterval(function(){
+        // console.log('Udit is best js devleloper');
+    }, 2000);
+
+
+    // Another Way =====>
+    
+    let setTime = function(){
+        console.log("Udit is best NodeJs Developer");
+    }
+    // setInterval(setTime, 2000);
+
+
+    // +++++++++++++ In setInterVal method we can pass three parameters +++++++++++++++
+
+    let repeatText = function(name){
+        // console.log(`${name} is Best Developer of MERN`);
+    }
+    setInterval(repeatText, 2000, 'Udit');
+
+
+    // Here we have 2 button and when we click on start then it should start and after clicking stop it should stop.
+
+
+    let startBtn = document.querySelector('#start');
+    let interval;
+    startBtn.addEventListener('click', function(){
+        interval = setInterval(function(){              // here we store setInterval in a variable for stopping it
+            console.log(`Udit is best Js Developer`)
+        }, 2000);
+    });
+
+    let stopBtn = document.querySelector('#stop');
+    stopBtn.addEventListener('click', function(){
+        clearInterval(interval);  // here interval argument is used from above function to stop this setInterval.
+    });
+
+
+    // ++++++++++ OR ++++++++++++
+
+    let startStopBtn = function(){
+
+        let interVal;
+
+        let startBtn = document.getElementById('start');
+        startBtn.addEventListener('click', function(){
+            let interVal = setInterval(`Udit is Best JS Developer`);
+        });
+
+        let stopBtn = document.getElementById('stop');
+        stopBtn.addEventListener('click', function(){
+            clearInterval(interVal);
+        })
+
+    }
+
+
+
+</script>
+
+</html>
