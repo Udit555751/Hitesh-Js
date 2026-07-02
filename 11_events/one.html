@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SetTimeOut</title>
+</head>
+<body>
+    
+    <h1>Udit is Js Developer</h1>
+    <button id="stop">Stop</button>
+
+</body>
+
+<script>
+
+    setTimeout(function(){
+        console.log("Udit is Js Developer");
+    }, 1000);
+
+
+    // Another Way ===>
+
+    let timeOut = function(){
+        console.log(`Hey this is best Developer`);
+    }
+    setTimeout(timeOut, 2000);  // here we pass the reference of function, not to execute.
+
+
+    // If We want change heading after 3 sec. ======>
+
+    let changeHeading = document.querySelector('h1');
+    setTimeout(function(){
+        // changeHeading.innerHTML = 'Udit is best developer of JS'
+    }, 3000);
+
+    // +++++++ OR ++++++++
+
+    let changeText = function(){
+        document.querySelector('h1').innerHTML = "Udit is Best JS Developer";
+    }
+    let stopTime = setTimeout(changeText, 3000);  // here we pass the reference of function, not to execute.
+
+
+    // When we click on stop then it should stop before printing =====>
+
+    let stopBtn = document.querySelector('#stop');
+
+    stopBtn.addEventListener('click', function(){
+        clearTimeout(stopTime);   // this variable is using from above setTimeout() method.
+    })
+
+
+</script>
+
+</html>
