@@ -150,8 +150,33 @@ input{
     }
 }
 
+
+#modal{
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+
+    justify-content: center;
+    align-items: center;
+}
+
+#modalContent{
+    background: white;
+    width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#closeBtn{
+    cursor: pointer;
+    float: right;
+    font-size: 25px;
+}
+
     </style>
 </head>
+
 <body>
     
 <h1>API Integration</h1>
@@ -168,6 +193,13 @@ input{
     <span id="pageNumber">1</span>
     <button id="nextBtn">Next</button>
 </div>
+
+<!-- Modal -->
+<div id="modal">
+    <div id="modalContent">
+        <span id="closeBtn">&times;</span>
+    </div>
+</div>
     
 
 </body>
@@ -181,6 +213,10 @@ input{
     let prevBtn = document.querySelector('#prevBtn');
     let pageNumber = document.querySelector('#pageNumber');
     let nextBtn = document.querySelector('#nextBtn');
+
+    let modal = document.querySelector('#modal');
+    let modalContent = document.querySelector('#modalContent');
+    let modalClsBtn = document.querySelector('#closeBtn');
 
     let limit = 10;
     let skip = 0;
@@ -219,7 +255,7 @@ input{
                         <p>Price: $ ${product.price}</p>
 
                         <div class="btns">
-                            <button class="viewBtn">View Details</button>
+                            <button class="viewBtn" data-id='${product.id}'>View Details</button>
                             <button class="cartBtn">Add To Cart</button>
                         </div>
                     </div>
@@ -271,6 +307,60 @@ input{
         }
         
     });
+
+
+    // Product Details API fetch =====>
+
+    async function getProductDetail(id){
+
+        try{
+
+            let detailResponse = await fetch(`https://dummyjson.com/products/${id}`);
+            let detailData = await detailResponse.json();
+            console.log(detailData);
+
+            modalContent.innerHTML = `
+            
+            <span id="closeBtn">&times;</span>
+            <img src='${detailData.thumbnail}' width="200">
+            <h2>${detailData.title}</h2>
+            <p>${detailData.description}</p>
+            <p>Price: $${detailData.price}</p>
+            <p>⭐ ${detailData.rating}</p>
+            <p>Brand: ${detailData.brand}</p>
+            <p>Category: ${detailData.category}</p>
+            <p>Stock: ${detailData.stock}</p>
+            
+            `
+            modal.style.display = 'flex';
+
+        } catch(err){
+            console.log(err);
+        }
+
+    }
+
+    container.addEventListener('click', function(e){
+        if(e.target.classList.contains('viewBtn')){
+            const id = e.target.dataset.id;
+            getProductDetail(id);
+        }
+    });
+
+
+    modal.addEventListener('click', function(e){
+        if(e.target.id === 'closeBtn'){
+            modal.style.display = 'none';
+        }
+    });
+
+    modal.addEventListener('click', function(e){
+        if(e.target === modal){
+            modal.style.display = 'none';
+        }
+    })
+
+
 
 </script>
 
