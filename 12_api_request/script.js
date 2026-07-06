@@ -10,6 +10,13 @@
     let modalContent = document.querySelector('#modalContent');
     let modalClsBtn = document.querySelector('#closeBtn');
 
+    let cartCount = document.querySelector('#cartCount');
+    let cartIcon = document.querySelector('#cartIcon');
+    let cartModal = document.querySelector('#cartModal');
+    let cartItems = document.querySelector('#cartItems');
+    let closeCart = document.querySelector('#closeCart');
+    let cartTotal = document.querySelector('#cartTotal');
+
     let limit = 10;
     let skip = 0;
     let currentPage = 1;
@@ -107,6 +114,10 @@
     });
 
 
+    function updateCartCount(){
+        cartCount.innerText = cart.length;
+    }
+
     container.addEventListener('click', function(e){
         if(e.target.classList.contains('cartBtn')){
 
@@ -118,18 +129,80 @@
                 return item.id === id;
             });
 
-            cart.push({
-                id: product.id,
-                title: product.title,
-                price: product.price,
-                thumbnail: product.thumbnail,
-                quantity: 1
+            let existingProduct = cart.find(function(existProduct){
+                return existProduct.id === id;
             });
 
+            if(existingProduct){
+                existingProduct.quantity++;
+            }
+            else{
+                cart.push({
+                    id: product.id,
+                    title: product.title,
+                    price: product.price,
+                    thumbnail: product.thumbnail,
+                    quantity: 1
+                });
+            }
+            
             console.log(cart);
+
+            updateCartCount();
         }
     });
 
+
+    function cartRender(){
+
+        if(cart.length === 0){
+            cartItems.innerHTML = `
+                <div class="emptyCart">
+                    <h3>Your cart is empty 🛒</h3>
+                    <p>Add some products to get started.</p>
+                </div>
+            `;
+
+            cartTotal.innerText = '';            
+            return;
+        }
+
+        let cartHtml = '';
+
+        cart.forEach((item) => {
+            cartHtml += `
+                <div class="cartItem">
+                    <img src='${item.thumbnail}'>
+
+                    <div>
+                        <h4>${item.title}</h4>
+                        <p>Price: ${item.price}</p>
+                        <p>Qty: ${item.quantity}</p>
+                    </div>
+                </div>
+            `;
+        });
+
+        cartItems.innerHTML = cartHtml;
+
+    }
+
+    cartIcon.addEventListener('click', function(e){
+        cartRender();
+        cartModal.style.display = 'flex';
+    });
+
+    closeCart.addEventListener('click', function(e){
+        cartModal.style.display = 'none';
+    });
+
+    cartModal.addEventListener('click', function(e){
+        if(e.target === cartModal){
+            cartModal.style.display = 'none';
+        }
+    });
+
+    
 
     // Product Details API fetch =====>
 
@@ -144,30 +217,31 @@
 
             modalContent.innerHTML = `
             
-            <span id="closeBtn">&times;</span>
+                <span id="closeBtn">&times;</span>
 
-            <img src="${detailData.thumbnail}">
+                <img src="${detailData.thumbnail}">
 
-            <div id="productDetail">
-                <h2>${detailData.title}</h2>
+                <div id="productDetail">
+                    <h2>${detailData.title}</h2>
 
-                <p class="desc">
-                    ${detailData.description}
-                </p>
-            
-                <div class="info">
-                    <span class="price">$${detailData.price}</span>
-                    <span class="rating">⭐ ${detailData.rating}</span>
+                    <p class="desc">
+                        ${detailData.description}
+                    </p>
+
+                    <div class="info">
+                        <span class="price">$${detailData.price}</span>
+                        <span class="rating">⭐ ${detailData.rating}</span>
+                    </div>
+
+                    <div class="meta">
+                        <p><strong>Brand:</strong> ${detailData.brand}</p>
+                        <p><strong>Category:</strong> ${detailData.category}</p>
+                        <p><strong>Stock:</strong> ${detailData.stock}</p>
+                    </div>
                 </div>
             
-                <div class="meta">
-                    <p><strong>Brand:</strong> ${detailData.brand}</p>
-                    <p><strong>Category:</strong> ${detailData.category}</p>
-                    <p><strong>Stock:</strong> ${detailData.stock}</p>
-                </div>
-            </div>
-            
-            `
+            `;
+
             modal.style.display = 'flex';
 
         } catch(err){
