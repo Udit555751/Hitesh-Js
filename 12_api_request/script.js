@@ -115,7 +115,12 @@
 
 
     function updateCartCount(){
-        cartCount.innerText = cart.length;
+        
+        let totalItems = cart.reduce((sum, item) => {
+            return sum + item.quantity;
+        }, 0);
+
+        cartCount.innerText = totalItems;
     }
 
     container.addEventListener('click', function(e){
@@ -177,7 +182,19 @@
                     <div>
                         <h4>${item.title}</h4>
                         <p>Price: ${item.price}</p>
-                        <p>Qty: ${item.quantity}</p>
+
+                        <div class="actionBox">
+                            <div class="qtyBox">
+                                <button class='minusBtn' data-id='${item.id}'>-</button>
+
+                                <span>Qty: ${item.quantity}</span>
+
+                                <button class='plusBtn' data-id='${item.id}'>+</button>
+                            </div>
+
+                            <button class='removeBtn' data-id='${item.id}'>Remove</button>
+                        </div>
+                        
                     </div>
                 </div>
             `;
@@ -186,6 +203,53 @@
         cartItems.innerHTML = cartHtml;
 
     }
+
+    cartItems.addEventListener('click', function(e){
+        if(e.target.classList.contains('minusBtn')){
+            let id = Number(e.target.dataset.id);
+            
+            let product = cart.find(item => item.id === id);
+
+            product.quantity--;
+
+            if(product.quantity === 0){
+                cart = cart.filter((item) => {
+                    return item.id != id;
+                });
+            }
+
+            cartRender();
+            updateCartCount();
+        }
+    });
+
+    cartItems.addEventListener('click', function(e){
+        if(e.target.classList.contains('plusBtn')){
+            let id = Number(e.target.dataset.id);
+
+            let product = cart.find(function(item){
+                return item.id === id;
+            });
+
+            product.quantity++;
+
+            cartRender();
+            updateCartCount();
+        }
+    });
+
+    cartItems.addEventListener('click', function(e){
+        if(e.target.classList.contains('removeBtn')){
+            let id = Number(e.target.dataset.id);
+
+            cart = cart.filter(function(item){
+                return item.id != id;
+            });
+
+            cartRender();
+            updateCartCount();
+        }
+    })
 
     cartIcon.addEventListener('click', function(e){
         cartRender();

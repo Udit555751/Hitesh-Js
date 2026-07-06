@@ -352,3 +352,23 @@ input{
 .emptyCart p {
     color: #777;
 }
+
+
+.actionBox{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.qtyBox{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.removeBtn{
+    padding: 8px 14px;
+    cursor: pointer;
+}
