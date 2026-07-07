@@ -39,8 +39,10 @@
 
             if(category){
                 url = `https://dummyjson.com/products/category/${category}?limit=${limit}&skip=${skip}`;
-            } else{
+            } else if(searchProduct){
                 url = `https://dummyjson.com/products/search?q=${searchProduct}&limit=${limit}&skip=${skip}`
+            } else{
+                url = `https://dummyjson.com/products?limit=${limit}&skip=${skip}`
             }
 
             let response = await fetch(url);
