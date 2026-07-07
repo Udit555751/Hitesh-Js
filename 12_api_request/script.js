@@ -17,6 +17,8 @@
     let closeCart = document.querySelector('#closeCart');
     let cartTotal = document.querySelector('#cartTotal');
 
+    // let toast = document.querySelector('#toast');
+
     let limit = 10;
     let skip = 0;
     let currentPage = 1;
@@ -117,7 +119,7 @@
 
 
     function updateCartCount(){
-        
+        console.log('Badge Updated');
         let totalItems = cart.reduce((sum, item) => {
             return sum + item.quantity;
         }, 0);
@@ -142,6 +144,8 @@
 
             if(existingProduct){
                 existingProduct.quantity++;
+
+                showToast("Quantity Updated 📦","success");
             }
             else{
                 cart.push({
@@ -151,12 +155,15 @@
                     thumbnail: product.thumbnail,
                     quantity: 1
                 });
+
+                showToast("Product Added 🛒","success");
             }
             
             // console.log(cart);
             
             saveCart();
             updateCartCount();
+            
         }
     });
 
@@ -231,6 +238,7 @@
 
             saveCart();
 
+            showToast("Quantity Reduce 🗑️","error");
             cartRender();
             updateCartCount();
         }
@@ -246,6 +254,8 @@
 
             saveCart();
 
+            showToast("Quantity Updated 📦","success");
+
             cartRender();
             updateCartCount();
         }
@@ -259,8 +269,11 @@
 
             saveCart();            
 
+            showToast("Product Removed 🗑️","error");
+            
             cartRender();
             updateCartCount();
+            
         }
 
     });
@@ -268,6 +281,24 @@
     function saveCart(){
         localStorage.setItem('cart', JSON.stringify(cart));
     }
+
+
+    let toast = document.querySelector("#toast");
+
+    function showToast(message, type){
+
+        toast.innerText = message;
+
+        toast.className = "";
+
+        toast.classList.add("show");
+        toast.classList.add(type);
+
+        setTimeout(() => {
+            toast.classList.remove("show");
+        }, 2000);
+    }
+
 
     cartIcon.addEventListener('click', function(e){
         cartRender();
