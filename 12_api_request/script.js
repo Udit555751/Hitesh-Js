@@ -22,7 +22,7 @@
     let currentPage = 1;
 
     let products = [];
-    let cart = [];
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
     async function productCard(searchProduct = ''){
 
@@ -83,6 +83,8 @@
     }
 
     productCard();
+    updateCartCount();
+    cartRender();
 
     searchBtn.addEventListener('click', function(){
         skip = 0;
@@ -128,7 +130,7 @@
 
             let id =  Number(e.target.dataset.id);
 
-            console.log(id);
+            // console.log(id);
 
             let product = products.find(function(item){
                 return item.id === id;
@@ -151,8 +153,9 @@
                 });
             }
             
-            console.log(cart);
-
+            // console.log(cart);
+            
+            saveCart();
             updateCartCount();
         }
     });
@@ -202,7 +205,15 @@
 
         cartItems.innerHTML = cartHtml;
 
+
+        let total = cart.reduce((sum, item) => {
+            return sum + (item.price * item.quantity);
+        }, 0);
+
+        cartTotal.innerText = `${total.toFixed(2)}`;
+
     }
+
 
     cartItems.addEventListener('click', function(e){
         if(e.target.classList.contains('minusBtn')){
@@ -214,16 +225,16 @@
 
             if(product.quantity === 0){
                 cart = cart.filter((item) => {
-                    return item.id != id;
+                    return item.id !== id;
                 });
             }
+
+            saveCart();
 
             cartRender();
             updateCartCount();
         }
-    });
 
-    cartItems.addEventListener('click', function(e){
         if(e.target.classList.contains('plusBtn')){
             let id = Number(e.target.dataset.id);
 
@@ -233,23 +244,30 @@
 
             product.quantity++;
 
+            saveCart();
+
             cartRender();
             updateCartCount();
         }
-    });
 
-    cartItems.addEventListener('click', function(e){
         if(e.target.classList.contains('removeBtn')){
             let id = Number(e.target.dataset.id);
 
             cart = cart.filter(function(item){
-                return item.id != id;
+                return item.id !== id;
             });
+
+            saveCart();            
 
             cartRender();
             updateCartCount();
         }
-    })
+
+    });
+
+    function saveCart(){
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
 
     cartIcon.addEventListener('click', function(e){
         cartRender();
@@ -333,6 +351,3 @@
             modal.style.display = 'none';
         }
     });
-
-
-    
