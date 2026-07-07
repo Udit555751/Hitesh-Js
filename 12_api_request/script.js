@@ -19,6 +19,9 @@
 
     // let toast = document.querySelector('#toast');
 
+    let categoryFilter = document.querySelector('#categoryFilter');
+
+
     let limit = 10;
     let skip = 0;
     let currentPage = 1;
@@ -26,13 +29,21 @@
     let products = [];
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-    async function productCard(searchProduct = ''){
+    async function productCard(searchProduct = '', category = ''){
 
         try{
 
             container.innerHTML = `<h2>Loading...</h2>`;
 
-            let response = await fetch(`https://dummyjson.com/products/search?q=${searchProduct}&limit=${limit}&skip=${skip}`);
+            let url = '';
+
+            if(category){
+                url = `https://dummyjson.com/products/category/${category}?limit=${limit}&skip=${skip}`;
+            } else{
+                url = `https://dummyjson.com/products/search?q=${searchProduct}&limit=${limit}&skip=${skip}`
+            }
+
+            let response = await fetch(url);
             let data = await response.json();
 
             products = data.products;
@@ -91,6 +102,8 @@
     searchBtn.addEventListener('click', function(){
         skip = 0;
         currentPage = 1;
+        categoryFilter.value = '';
+
         productCard(searchInput.value);
     });
 
@@ -98,6 +111,8 @@
         if(e.key === 'Enter'){
             skip = 0;
             currentPage = 1;
+            categoryFilter.value = '';
+
             productCard(searchInput.value);
         }
     });
@@ -105,21 +120,23 @@
     nextBtn.addEventListener('click', function(){
         skip += limit;
         currentPage++;
-        productCard(searchInput.value);
+
+        productCard(searchInput.value, categoryFilter.value);
     });
 
     prevBtn.addEventListener('click', function(){
         if(currentPage > 1){
             skip -= limit;
             currentPage--;
-            productCard(searchInput.value);
+
+            productCard(searchInput.value, categoryFilter.value);
         }
         
     });
 
 
     function updateCartCount(){
-        console.log('Badge Updated');
+
         let totalItems = cart.reduce((sum, item) => {
             return sum + item.quantity;
         }, 0);
@@ -317,7 +334,7 @@
 
     
 
-    // Product Details API fetch =====>
+    // Product Details API fetch / Modal =====>
 
     async function getProductDetail(id){
 
@@ -382,3 +399,42 @@
             modal.style.display = 'none';
         }
     });
+
+
+    // Products filter on the basis of Categories ======>
+    
+    async function filterCategory(){
+
+        try{
+
+            let categoryResponse = await fetch(`https://dummyjson.com/products/categories`);
+            let categoryData = await categoryResponse.json();
+
+            console.log(categoryData);
+
+            categoryData.forEach((productCategory) => {
+                categoryFilter.innerHTML += `
+                    <option value='${productCategory.slug}'>${productCategory.name}</option>
+                `;
+            });
+
+        } catch(err){
+            console.log(err);
+        }
+
+    }
+
+    filterCategory();
+
+    categoryFilter.addEventListener('change', function(e){
+
+        skip = 0;
+        currentPage = 1;
+
+        searchInput.value = '';
+
+        productCard(searchInput.value, categoryFilter.value);
+
+        console.log(categoryFilter.value);
+    });
+    
