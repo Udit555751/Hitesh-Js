@@ -23,6 +23,8 @@
 
     let sortFilter = document.querySelector('#sortFilter');
 
+    let clearCartBtn = document.querySelector('#clearCartBtn');
+
 
     let limit = 10;
     let skip = 0;
@@ -220,7 +222,7 @@
 
                     <div>
                         <h4>${item.title}</h4>
-                        <p>Price: ${item.price}</p>
+                        <p>Price: $ ${item.price}</p>
 
                         <div class="actionBox">
                             <div class="qtyBox">
@@ -246,7 +248,7 @@
             return sum + (item.price * item.quantity);
         }, 0);
 
-        cartTotal.innerText = `${total.toFixed(2)}`;
+        cartTotal.innerText = `Total: $ ${total.toFixed(2)}`;
 
     }
 
@@ -343,6 +345,19 @@
             cartModal.style.display = 'none';
         }
     });
+
+
+    clearCartBtn.addEventListener('click', clearCart);
+
+    function clearCart(){
+        cart = [];
+        saveCart();
+        cartRender();
+        updateCartCount();
+        showToast("Cart Cleared 🗑️");
+        // console.log('Cart Clear');
+    }
+    
 
     
 
@@ -452,7 +467,8 @@
     });
     
 
-    // ========= Sort Filter =========>
+
+    // ======================= Sort Filter =============================>
 
     sortFilter.addEventListener('change', function(e){
 
@@ -461,7 +477,26 @@
         skip = 0;
         currentPage = 1;
 
-        productCard(sortBy);
+        switch(sortBy){
+
+            case "lowToHigh": 
+                products.sort((a,b) => a.price - b.price);
+                break;
+
+            case 'highToLow':
+                products.sort((a,b) => b.price - a.price);
+                break;
+
+            case 'rating':
+                products.sort((a,b) => b.rating - a.rating);
+                break;
+            
+            case 'name':
+                products.sort((a,b) => a.title.localeCompare(b.title));
+
+        }
+
+        renderProducts(products);
 
         console.log(sortFilter.value);
-    })
+    });
