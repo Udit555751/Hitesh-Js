@@ -21,6 +21,8 @@
 
     let categoryFilter = document.querySelector('#categoryFilter');
 
+    let sortFilter = document.querySelector('#sortFilter');
+
 
     let limit = 10;
     let skip = 0;
@@ -28,6 +30,7 @@
 
     let products = [];
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
 
     async function productCard(searchProduct = '', category = ''){
 
@@ -62,27 +65,7 @@
                 return;
             }
 
-            let card = '';
-
-            data.products.forEach(product => {
-                card += `
-                    <div class='card'>
-                        <img src='${product.thumbnail}' alt='${product.title}'>
-                        <h4>${product.title}</h4>
-                        <p>${product.brand || 'No Brand'}</p>
-                        <p>⭐ ${product.rating}</p>
-                        <p>Price: $ ${product.price}</p>
-
-                        <div class="btns">
-                            <button class="viewBtn" data-id='${product.id}'>View Details</button>
-                            <button class="cartBtn" data-id='${product.id}'>Add To Cart</button>
-                        </div>
-                    </div>
-                `;
-
-            });
-
-            container.innerHTML = card;
+            renderProducts(products);
 
             pageNumber.innerText = currentPage;
 
@@ -100,6 +83,33 @@
     productCard();
     updateCartCount();
     cartRender();
+
+
+    function renderProducts(productList){
+
+        let card = '';
+
+        productList.forEach(product => {
+            card += `
+                <div class='card'>
+                    <img src='${product.thumbnail}' alt='${product.title}'>
+                    <h4>${product.title}</h4>
+                    <p>${product.brand || 'No Brand'}</p>
+                    <p>⭐ ${product.rating}</p>
+                    <p>Price: $ ${product.price}</p>
+
+                    <div class="btns">
+                        <button class="viewBtn" data-id='${product.id}'>View Details</button>
+                        <button class="cartBtn" data-id='${product.id}'>Add To Cart</button>
+                    </div>
+                </div>
+            `;
+        });
+
+        container.innerHTML = card;
+
+    }
+
 
     searchBtn.addEventListener('click', function(){
         skip = 0;
@@ -403,6 +413,7 @@
     });
 
 
+
     // Products filter on the basis of Categories ======>
     
     async function filterCategory(){
@@ -412,7 +423,7 @@
             let categoryResponse = await fetch(`https://dummyjson.com/products/categories`);
             let categoryData = await categoryResponse.json();
 
-            console.log(categoryData);
+            // console.log(categoryData);
 
             categoryData.forEach((productCategory) => {
                 categoryFilter.innerHTML += `
@@ -437,6 +448,20 @@
 
         productCard(searchInput.value, categoryFilter.value);
 
-        console.log(categoryFilter.value);
+        // console.log(categoryFilter.value);
     });
     
+
+    // ========= Sort Filter =========>
+
+    sortFilter.addEventListener('change', function(e){
+
+        let sortBy = e.target.value;
+
+        skip = 0;
+        currentPage = 1;
+
+        productCard(sortBy);
+
+        console.log(sortFilter.value);
+    })

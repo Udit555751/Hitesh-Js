@@ -62,10 +62,45 @@ input{
 }
 
 #searchBtn{
-    padding: 10px 20px;
-    margin-top: 10px;
+    padding: 10px;
     cursor: pointer;
 }
+
+#categoryFilter{
+    padding: 10px;
+}
+
+@media (max-width: 768px){
+
+    nav{
+        flex-direction: column;
+        align-items: stretch;
+        padding: 20px;
+    }
+
+    nav h2{
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .right-nav{
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+    }
+
+    #searchInput,
+    #searchBtn,
+    #categoryFilter{
+        width: 100%;
+    }
+
+    #cartIcon{
+        align-self: center;
+        margin-top: 10px;
+    }
+}
+
 
 /* Cards Container */
 #container{

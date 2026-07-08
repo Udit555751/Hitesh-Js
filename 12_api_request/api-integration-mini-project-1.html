@@ -12,6 +12,7 @@
     
     <h1>API Integration</h1>
 
+    <!-- Navbar -->
     <nav>
         <h2>ShopEase</h2>
 
@@ -19,6 +20,11 @@
             <input type="text" id="searchInput" placeholder="Search products">
 
             <button id="searchBtn">Search</button>
+
+            <!-- Product Category Filter -->
+            <select id="categoryFilter">
+                <option value="">All Category</option>
+            </select>
 
             <div id="cartIcon">
                 🛒
@@ -29,6 +35,7 @@
     
     <div id="container"></div>
     
+    <!-- Pagination -->
     <div class="pagination">
         <button id="prevBtn">Prev</button>
         <span id="pageNumber">1</span>
@@ -56,10 +63,14 @@
         </div>
     </div>
 
-    <!-- Product Category Filter -->
-    <select id="categoryFilter">
-        <option value="">All Category</option>
-
+    
+    <!-- Sort Filter -->
+    <select name="" id="sortFilter">
+        <option value="">Default</option>
+        <option value="lowToHigh">Price: Low to High</option>
+        <option value="highToLow">Price: High to Low</option>
+        <option value="rating">Rating</option>
+        <option value="name">Name A-Z</option>
     </select>
 
 
