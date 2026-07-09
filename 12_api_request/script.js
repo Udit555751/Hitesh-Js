@@ -25,6 +25,8 @@
 
     let clearCartBtn = document.querySelector('#clearCartBtn');
 
+    let timer;
+
 
     let limit = 10;
     let skip = 0;
@@ -309,6 +311,7 @@
 
     });
 
+
     function saveCart(){
         localStorage.setItem('cart', JSON.stringify(cart));
     }
@@ -361,7 +364,7 @@
 
     
 
-    // Product Details API fetch / Modal =====>
+    // =========================== Product Details API fetch / Modal =======================>
 
     async function getProductDetail(id){
 
@@ -429,7 +432,7 @@
 
 
 
-    // Products filter on the basis of Categories ======>
+    // ==================== Products filter on the basis of Categories =================>
     
     async function filterCategory(){
 
@@ -468,7 +471,7 @@
     
 
 
-    // ======================= Sort Filter =============================>
+    // =============================== Sort Filter =======================================>
 
     sortFilter.addEventListener('change', function(e){
 
@@ -499,4 +502,19 @@
         renderProducts(products);
 
         console.log(sortFilter.value);
+    });
+
+
+    
+    // =========================== Debounce (Type krne pr search start kr deta) ========================>
+
+    searchInput.addEventListener('input', function(){
+
+
+        clearTimeout(timer);
+
+        timer = setTimeout(function(){
+            productCard(searchInput.value);
+        }, 500);
+
     });
