@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Integration Mini Project</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    
+    <!-- <h1>API Integration</h1> -->
+
+    <!-- Navbar -->
+    <nav>
+        <h2>ShopEase</h2>
+
+        <div class="right-nav">
+            <input type="text" id="searchInput" placeholder="Search products">
+
+            <button id="searchBtn">Search</button>
+
+            <!-- Product Category Filter -->
+            <select id="categoryFilter">
+                <option value="">All Category</option>
+            </select>
+
+            <!-- Sort Filter -->
+            <select name="" id="sortFilter">
+                <option value="">Default</option>
+                <option value="lowToHigh">Price: Low to High</option>
+                <option value="highToLow">Price: High to Low</option>
+                <option value="rating">Rating</option>
+                <option value="name">Name A-Z</option>
+            </select>
+
+            <div id="cartIcon">
+                🛒
+                <span id="cartCount">0</span>
+            </div>
+        </div>
+    </nav>
+    
+    <div id="container"></div>
+    
+    <!-- Pagination -->
+    <div class="pagination">
+        <button id="prevBtn">Prev</button>
+        <span id="pageNumber">1</span>
+        <button id="nextBtn">Next</button>
+    </div>
+    
+    <!-- Modal -->
+    <div id="modal">
+        <div id="modalContent">
+            <span id="closeBtn">&times;</span>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal">
+        <div id="cartContent">
+            <span id="closeCart">&times;</span>
+
+            <h3>My Cart</h3>
+            
+            <div id="cartItems"></div>
+
+            <div class="cartFooter">
+
+                <h4 id="cartTotal">Total: $ 0.00</h4>
+                <button id="clearCartBtn">🗑️ Clear Cart</button>
+
+            </div>
+
+        </div>
+    </div>
+
+    
+    <!-- Toast -->
+    <div id="toast"></div>
+    
+    
+
+</body>
+
+<script src="script.js"></script>
+
+</html>
